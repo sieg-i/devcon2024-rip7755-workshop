@@ -1,15 +1,3 @@
-# services
+# Syncer Service
 
-To install dependencies:
-
-```bash
-bun install
-```
-
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.1.29. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+The syncer service is responsible for bi-directional communication between a mock-L1 chain and mock-L2 chains running locally. The syncer posts L2 output roots to `Rollup` contracts on L1 and L1 state roots to `MockEIP4788` on the L2 chains.
