@@ -8,7 +8,7 @@ import {CrossChainRequest} from "../RIP7755Structs.sol";
 import {IEIP4788} from "../interfaces/IEIP4788.sol";
 
 contract Prover {
-    constructor(address) {}
+    constructor(address beaconRootsOracle) {}
 
     // WORKSHOP: Your code here...
 }
