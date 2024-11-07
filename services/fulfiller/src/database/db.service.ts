@@ -12,7 +12,7 @@ export default class DBService {
     request: RequestType,
     activeChains: ActiveChains
   ): Promise<boolean> {
-    const docs = await Bun.file("./src/database/db.json").json();
+    const docs = await this.readFile("./src/database/db.json");
 
     docs.push({
       id: crypto.randomUUID(),
@@ -41,7 +41,7 @@ export default class DBService {
   }
 
   async getClaimableRewards(): Promise<SubmissionType[]> {
-    const docs = await Bun.file("./src/database/db.json").json();
+    const docs = await this.readFile("./src/database/db.json");
     const validDocs = docs.filter(
       (doc: SubmissionType) =>
         doc.claimAvailableAt <= Math.floor(Date.now() / 1000) &&
@@ -51,7 +51,7 @@ export default class DBService {
   }
 
   async updateRewardClaimed(id: string, txnHash: Address): Promise<void> {
-    const docs = await Bun.file("./src/database/db.json").json();
+    const docs = await this.readFile("./src/database/db.json");
 
     const doc = docs.find((doc: SubmissionType) => doc.id === id);
     if (!doc) {
@@ -80,5 +80,13 @@ export default class DBService {
     }
 
     return currentValue;
+  }
+
+  private async readFile(path: string, defaultValue = []): Promise<any> {
+    try {
+      return await Bun.file(path).json();
+    } catch {
+      return defaultValue;
+    }
   }
 }
