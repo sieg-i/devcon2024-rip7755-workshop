@@ -75,7 +75,11 @@ export default class Syncer {
           block.stateRoot
         );
       } else {
-        await this.submitStateRootToSourceChain(blockNumber, block.stateRoot);
+        await this.submitStateRootToSourceChain(
+          blockNumber,
+          block.timestamp,
+          block.stateRoot
+        );
       }
 
       await sleep(1000);
@@ -98,13 +102,17 @@ export default class Syncer {
     console.log("Transaction successful!");
   }
 
-  async submitStateRootToSourceChain(blockNumber: bigint, stateRoot: string) {
+  async submitStateRootToSourceChain(
+    blockNumber: bigint,
+    blockTimestamp: bigint,
+    stateRoot: string
+  ) {
     console.log("Submitting state root to source chain...");
     const hash = await this.sourceWallet.writeContract({
       address: rollups[this.targetClient.chain.id],
       abi: rollupAbi,
-      functionName: "commitStateRoot",
-      args: [blockNumber, stateRoot],
+      functionName: "commitOutputRoot",
+      args: [blockNumber, blockTimestamp, stateRoot],
     });
     await this.publicClient.waitForTransactionReceipt({ hash });
     console.log("Transaction successful!");

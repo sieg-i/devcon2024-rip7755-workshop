@@ -120,6 +120,8 @@ export default class ProverService {
       throw new Error("Storage proof value is empty");
     }
 
+    console.log(proofObj);
+
     return proofObj;
   }
 }

@@ -1,9 +1,14 @@
 export default [
   {
     type: "function",
-    name: "commitStateRoot",
+    name: "commitOutputRoot",
     inputs: [
       { name: "blockNumber", type: "uint256", internalType: "uint256" },
+      {
+        name: "blockTimestamp",
+        type: "uint256",
+        internalType: "uint256",
+      },
       { name: "stateRoot", type: "bytes32", internalType: "bytes32" },
     ],
     outputs: [],
@@ -18,7 +23,7 @@ export default [
   },
   {
     type: "function",
-    name: "stateRoots",
+    name: "outputRoots",
     inputs: [{ name: "blockNumber", type: "uint256", internalType: "uint256" }],
     outputs: [{ name: "", type: "bytes32", internalType: "bytes32" }],
     stateMutability: "view",
