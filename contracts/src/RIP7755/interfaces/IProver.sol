@@ -8,11 +8,11 @@ import {CrossChainRequest} from "../RIP7755Structs.sol";
 /// for how that should be accomplished will vary slightly depending on the destination chain since not all rollups
 /// post their data to L1 in the same format.
 interface IProver {
-    /// @notice Validates storage proofs and verifies fill
+    /// @notice Validates storage proofs and verifies fulfillment
     ///
     /// @custom:reverts If storage proof invalid.
-    /// @custom:reverts If fillInfo not found at inboxContractStorageKey on crossChainCall.verifyingContract
-    /// @custom:reverts If fillInfo.timestamp is less than
+    /// @custom:reverts If fulfillmentInfo not found at inboxContractStorageKey on crossChainCall.inboxContract
+    /// @custom:reverts If fulfillmentInfo.timestamp is less than
     /// crossChainCall.finalityDelaySeconds from current destination chain block timestamp.
     ///
     /// @dev Implementation will vary by L2
