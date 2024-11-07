@@ -12,5 +12,5 @@ import {IEIP4788} from "../interfaces/IEIP4788.sol";
 contract Prover {
     constructor(address) {}
 
-    // TOOD: Your code here...
+    // WORKSHOP: Your code here...
 }

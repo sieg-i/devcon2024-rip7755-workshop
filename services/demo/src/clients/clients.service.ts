@@ -54,6 +54,6 @@ export default class ClientsService {
   }
 
   async rip7755Mint(address: Address, mintPrice: bigint) {
-    // TODO: Your code here...
+    // WORKSHOP: Your code here...
   }
 }
