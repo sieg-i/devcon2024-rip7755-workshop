@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.24;
 
-import {RLPReader} from "optimism/packages/contracts-bedrock/src/libraries/rlp/RLPReader.sol";
-
 import {IProver} from "../interfaces/IProver.sol";
 import {StateValidator} from "../libraries/StateValidator.sol";
 import {RIP7755Inbox} from "../RIP7755Inbox.sol";
