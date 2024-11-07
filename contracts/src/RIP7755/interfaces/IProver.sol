@@ -15,13 +15,13 @@ interface IProver {
     /// @custom:reverts If fulfillmentInfo.timestamp is less than
     /// crossChainCall.finalityDelaySeconds from current destination chain block timestamp.
     ///
-    /// @dev Implementation will vary by L2
+    /// @dev Implementation will vary by destination L2
     ///
     /// @param inboxContractStorageKey The storage location of the data to verify on the destination chain
     /// `RIP7755Inbox` contract
     /// @param fulfillmentInfo The fulfillment info that should be located at `inboxContractStorageKey` in storage
     /// on the destination chain `RIP7755Inbox` contract
-    /// @param request The original cross chain request submitted to this contract
+    /// @param request The original cross chain request submitted to the `RIP7755Outbox` contract
     /// @param proofData The proof to validate
     function validateProof(
         bytes memory inboxContractStorageKey,
