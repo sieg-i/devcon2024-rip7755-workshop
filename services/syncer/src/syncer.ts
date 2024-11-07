@@ -2,19 +2,19 @@ import { createPublicClient, createWalletClient, http, type Chain } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { sleep } from "bun";
 
-import { baseChain } from "./common/chains/baseChain";
+import { mockL1 } from "./common/chains/mockL1";
 import { mockEIP4788Abi } from "./abis/MockEIP4788";
-import { chainA } from "./common/chains/chainA";
-import { chainB } from "./common/chains/chainB";
+import { mockBase } from "./common/chains/mockBase";
+import { mockArbitrum } from "./common/chains/mockArbitrum";
 import { rollupAbi } from "./abis/Rollup";
 
 const rollups = {
-  [chainA.id]: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-  [chainB.id]: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+  [mockBase.id]: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  [mockArbitrum.id]: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
 } as any;
 const beaconContracts = {
-  [chainA.id]: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-  [chainB.id]: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  [mockBase.id]: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  [mockArbitrum.id]: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
 } as any;
 
 export default class Syncer {
@@ -26,11 +26,11 @@ export default class Syncer {
 
   constructor(targetChain: Chain, pKey: `0x${string}`) {
     this.publicClient = createPublicClient({
-      chain: baseChain,
+      chain: mockL1,
       transport: http(),
     });
     this.sourceWallet = createWalletClient({
-      chain: baseChain,
+      chain: mockL1,
       transport: http(),
       account: privateKeyToAccount(pKey),
     });

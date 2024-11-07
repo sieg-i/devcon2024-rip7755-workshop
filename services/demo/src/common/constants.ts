@@ -1,7 +1,7 @@
 import { createPublicClient, http, toHex } from "viem";
 
-import { chainA } from "./chains/chainA";
-import { chainB } from "./chains/chainB";
+import { mockBase } from "./chains/mockBase";
+import { mockArbitrum } from "./chains/mockArbitrum";
 
 // Global
 export const REWARD_ASSET = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
@@ -25,7 +25,7 @@ export const chainConfigs = {
       nft: "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
     },
     publicClient: createPublicClient({
-      chain: chainB,
+      chain: mockArbitrum,
       transport: http(),
     }),
   },
@@ -41,7 +41,7 @@ export const chainConfigs = {
       outbox: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
     },
     publicClient: createPublicClient({
-      chain: chainA,
+      chain: mockBase,
       transport: http(),
     }),
   },

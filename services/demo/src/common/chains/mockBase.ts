@@ -1,8 +1,8 @@
 import { defineChain } from "viem";
 
-export const chainB = defineChain({
-  id: 111112,
-  name: "Chain B",
+export const mockBase = defineChain({
+  id: 111111,
+  name: "Mock Base",
   nativeCurrency: {
     decimals: 18,
     name: "Ether",
@@ -10,7 +10,7 @@ export const chainB = defineChain({
   },
   rpcUrls: {
     default: {
-      http: ["http://localhost:8547"],
+      http: ["http://localhost:8546"],
     },
   },
   blockExplorers: {

@@ -1,8 +1,8 @@
 import { defineChain } from "viem";
 
-export const baseChain = defineChain({
+export const mockL1 = defineChain({
   id: 31337,
-  name: "BaseChain",
+  name: "Mock L1",
   nativeCurrency: {
     decimals: 18,
     name: "Ether",

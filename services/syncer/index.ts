@@ -1,15 +1,18 @@
-import { chainA } from "./src/common/chains/chainA";
-import { chainB } from "./src/common/chains/chainB";
+import { mockBase } from "./src/common/chains/mockBase";
+import { mockArbitrum } from "./src/common/chains/mockArbitrum";
 import Syncer from "./src/syncer";
 
 async function main() {
-  const chainAKey = process.env.CHAIN_A_KEY as `0x${string}`;
-  const chainBKey = process.env.CHAIN_B_KEY as `0x${string}`;
+  const mockBaseKey = process.env.MOCK_BASE_KEY as `0x${string}`;
+  const mockArbitrumKey = process.env.MOCK_ARBITRUM_KEY as `0x${string}`;
 
-  const syncerA = new Syncer(chainA, chainAKey);
-  const syncerB = new Syncer(chainB, chainBKey);
+  const syncerBase = new Syncer(mockBase, mockBaseKey);
+  const syncerArbitrum = new Syncer(mockArbitrum, mockArbitrumKey);
 
-  await Promise.all([syncerA.monitorChains(), syncerB.monitorChains()]);
+  await Promise.all([
+    syncerBase.monitorChains(),
+    syncerArbitrum.monitorChains(),
+  ]);
 }
 
 main().catch((error) => {
