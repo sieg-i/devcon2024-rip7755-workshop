@@ -28,12 +28,16 @@ export default class ChainService {
     });
   }
 
-  async getL2BlockNumber(l1BlockNumber: bigint): Promise<bigint> {
-    return await this.activeChains.l1.publicClient.readContract({
+  async getL2BlockNumber(l1BlockNumber: bigint): Promise<Block> {
+    const blockNumber = await this.activeChains.l1.publicClient.readContract({
       address: this.activeChains.l1.contracts.mockArbRollup,
       abi: Rollup,
       functionName: "latestConfirmed",
       blockNumber: l1BlockNumber,
+    });
+
+    return await this.activeChains.dst.publicClient.getBlock({
+      blockNumber,
     });
   }
 

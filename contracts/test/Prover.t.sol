@@ -31,7 +31,7 @@ contract ProverTest is Test {
     //     string memory path = string.concat(rootPath, "/test/data/proof.json");
     //     validProof = vm.readFile(path);
 
-    //     mockEIP4788.commitBeaconRoot(1, 1730930824, 0x429009a0eb2c49ec2248929ed3635e4c4f23c5c451a13f13040715db71c34006);
+    //     mockEIP4788.commitBeaconRoot(1, 1730999484, 0xd243bda4ffb1c44feeae5daa04f85dcd081b448233aa41ec48ab5970b3bbbfb7);
     // }
 
     // function test_validateProof() public view {
@@ -52,15 +52,13 @@ contract ProverTest is Test {
     //         rewardAsset: 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE,
     //         rewardAmount: 1020000000000000000,
     //         finalityDelaySeconds: 10,
-    //         nonce: 1,
-    //         expiry: 1731535593,
+    //         nonce: 3,
+    //         expiry: 1731604261,
     //         precheckContract: address(0),
     //         precheckData: ""
     //     });
-    //     RIP7755Inbox.FulfillmentInfo memory fillInfo = RIP7755Inbox.FulfillmentInfo({
-    //         timestamp: 1730930796,
-    //         filler: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
-    //     });
+    //     RIP7755Inbox.FulfillmentInfo memory fillInfo =
+    //         RIP7755Inbox.FulfillmentInfo({timestamp: 1730999465, filler: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266});
 
     //     bytes memory storageProofData = _buildProof(validProof);
     //     bytes memory inboxStorageKey = _deriveStorageKey(request);
@@ -84,7 +82,8 @@ contract ProverTest is Test {
 
     //     Prover.RIP7755Proof memory proofData = Prover.RIP7755Proof({
     //         l1Timestamp: json.readUint(".l1Timestamp"),
-    //         l2BlockNumber: json.readUint(".l2BlockNumber"),
+    //         l2BlockTimestamp: json.readUint(".l2BlockTimestamp"),
+    //         l2StateRoot: json.readBytes32(".l2StateRoot"),
     //         dstL2StateRootProofParams: dstL2StateRootParams,
     //         dstL2AccountProofParams: dstL2AccountProofParams
     //     });

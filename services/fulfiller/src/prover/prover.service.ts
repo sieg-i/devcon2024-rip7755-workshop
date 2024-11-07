@@ -25,34 +25,32 @@ export default class ProverService {
       throw new Error("L1 block number is required");
     }
 
-    const l2BlockNumber = await this.chainService.getL2BlockNumber(
-      l1Block.number
-    );
+    const l2Block = await this.chainService.getL2BlockNumber(l1Block.number);
 
     const l2Slot = this.deriveRIP7755VerifierStorageSlot(requestHash);
 
     const storageProofOpts = {
       l1BlockNumber: l1Block.number,
-      l2BlockNumber,
+      l2Block,
       l2Slot,
     };
     const storageProofs = await this.getStorageProofs(storageProofOpts);
 
-    return this.buildProofObj(storageProofs, l1Block, l2BlockNumber);
+    return this.buildProofObj(storageProofs, l1Block, l2Block);
   }
 
   private async getStorageProofs(opts: GetStorageProofsInput): Promise<Proofs> {
-    const { l1BlockNumber, l2BlockNumber, l2Slot } = opts;
+    const { l1BlockNumber, l2Block, l2Slot } = opts;
     const dstConfig = this.activeChains.dst;
 
     const storageProofs = await Promise.all([
       this.activeChains.l1.publicClient.getProof(
-        this.buildL1Proof(l1BlockNumber, l2BlockNumber)
+        this.buildL1Proof(l1BlockNumber, l2Block.timestamp)
       ),
       dstConfig.publicClient.getProof({
         address: dstConfig.contracts.inbox,
         storageKeys: [l2Slot],
-        blockNumber: l2BlockNumber,
+        blockNumber: l2Block.number as bigint,
       }),
     ]);
 
@@ -62,7 +60,7 @@ export default class ProverService {
 
   private buildL1Proof(
     l1BlockNumber: bigint,
-    l2BlockNumber: bigint
+    l2BlockTimestamp: bigint
   ): {
     address: Address;
     storageKeys: Address[];
@@ -74,7 +72,7 @@ export default class ProverService {
       keccak256(
         encodeAbiParameters(
           [{ type: "uint256" }, { type: "uint256" }],
-          [l2BlockNumber, BigInt(1)]
+          [l2BlockTimestamp, BigInt(1)]
         )
       ),
     ];
@@ -94,11 +92,12 @@ export default class ProverService {
   private buildProofObj(
     proofs: Proofs,
     l1Block: Block,
-    l2BlockNumber: bigint
+    l2Block: Block
   ): ProofType {
     const proofObj: ProofType = {
       l1Timestamp: l1Block.timestamp,
-      l2BlockNumber,
+      l2BlockTimestamp: l2Block.timestamp,
+      l2StateRoot: l2Block.stateRoot,
       dstL2StateRootProofParams: {
         storageKey: proofs.storageProof.storageProof[0].key,
         storageValue: toHex(proofs.storageProof.storageProof[0].value),

@@ -1,6 +1,6 @@
 export default [
   {
-    name: "proofData",
+    name: "proof",
     type: "tuple",
     internalType: "struct Prover.RIP7755Proof",
     components: [
@@ -10,9 +10,14 @@ export default [
         internalType: "uint256",
       },
       {
-        name: "l2BlockNumber",
+        name: "l2BlockTimestamp",
         type: "uint256",
         internalType: "uint256",
+      },
+      {
+        name: "l2StateRoot",
+        type: "bytes32",
+        internalType: "bytes32",
       },
       {
         name: "dstL2StateRootProofParams",

@@ -1,4 +1,4 @@
-import type { Address, GetProofReturnType } from "viem";
+import type { Address, Block, GetProofReturnType } from "viem";
 
 export type Proofs = {
   storageProof: GetProofReturnType;
@@ -7,6 +7,6 @@ export type Proofs = {
 
 export type GetStorageProofsInput = {
   l1BlockNumber: bigint;
-  l2BlockNumber: bigint;
+  l2Block: Block;
   l2Slot: Address;
 };

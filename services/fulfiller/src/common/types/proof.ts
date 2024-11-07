@@ -9,7 +9,8 @@ export type AccountProofParams = {
 
 export type ProofType = {
   l1Timestamp: bigint;
-  l2BlockNumber: bigint;
+  l2BlockTimestamp: bigint;
+  l2StateRoot: Address;
   dstL2StateRootProofParams: AccountProofParams;
   dstL2AccountProofParams: AccountProofParams;
 };

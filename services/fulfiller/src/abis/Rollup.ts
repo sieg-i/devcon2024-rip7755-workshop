@@ -24,7 +24,13 @@ export default [
   {
     type: "function",
     name: "outputRoots",
-    inputs: [{ name: "blockNumber", type: "uint256", internalType: "uint256" }],
+    inputs: [
+      {
+        name: "blockTimestamp",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
     outputs: [{ name: "", type: "bytes32", internalType: "bytes32" }],
     stateMutability: "view",
   },
