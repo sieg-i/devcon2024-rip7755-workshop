@@ -1,7 +1,7 @@
 -include .env
 
 setup:
-	cd contracts && forge install && forge build && chmod +x setupContracts.sh
+	cd contracts && forge install && forge build
 	cd services/demo && bun install
 	cd services/fulfiller && bun install
 	cd services/syncer && bun install
