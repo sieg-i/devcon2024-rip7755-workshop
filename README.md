@@ -12,6 +12,21 @@ After cloning the repo, run `make setup` to install dependencies and build the p
 
 Copy the `.env.example` file to `.env`. These are the environment variables that the services and contracts need to run. No need to change any values.
 
+## Assignment
+
+There are two key components that need to be implemented:
+
+1. Implement the `Prover` contract for the destination L2 chain.
+2. Implement the `rip7755Mint` function in the demo service.
+
+The `Prover` contract should adhere to the `IProver` interface and implement validation of a nested storage proof. To properly set up the storage proof parameters, pay attention to the `Rollup` contract. This is where our mock-L2 chains are posting roots on L1 - notice how the destination L2's state root is used to post data there.
+
+Once the `Prover` contract is implemented, try running the test file to see if it passes!
+
+The `rip7755Mint` function in the demo service should construct an RIP-7755 request and submit to the mock Base `RIP7755Outbox` contract. The target call should be the `mint` function in our simple NFT contract.
+
+## Run The App End-to-End
+
 ### Start Mock L1
 
 Run `make start-mock-L1` to start the mock L1 chain.
