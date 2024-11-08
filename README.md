@@ -10,8 +10,6 @@
 
 After cloning the repo, run `make setup` to install dependencies and build the project.
 
-Copy the `.env.example` file to `.env`. These are the environment variables that the services and contracts need to run. No need to change any values.
-
 ## Assignment
 
 There are two key components that need to be implemented:
