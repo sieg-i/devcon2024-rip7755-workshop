@@ -25,8 +25,8 @@ start-mock-arbitrum:
 setup-contracts:
 	cd contracts && forge script script/rollups/DeployRollup.s.sol:DeployRollup --private-key $(PRIVATE_KEY) --rpc-url $(MOCK_L1_URL) --broadcast -vvvv
 	cd contracts && forge script script/rollups/DeployRollup.s.sol:DeployRollup --private-key $(PRIVATE_KEY) --rpc-url $(MOCK_L1_URL) --broadcast -vvvv
-	cd contracts && forge script script/rollups/DeployMockEIP4788.s.sol:DeployMockEIP4788 --private-key $(PRIVATE_KEY) --rpc-url $(MOCK_BASE_URL) --broadcast -vvvv
-	cd contracts && forge script script/rollups/DeployMockEIP4788.s.sol:DeployMockEIP4788 --private-key $(PRIVATE_KEY) --rpc-url $(MOCK_ARBITRUM_URL) --broadcast -vvvv
+	cd contracts && forge script script/rollups/DeployBeaconOracle.s.sol:DeployBeaconOracle --private-key $(PRIVATE_KEY) --rpc-url $(MOCK_BASE_URL) --broadcast -vvvv
+	cd contracts && forge script script/rollups/DeployBeaconOracle.s.sol:DeployBeaconOracle --private-key $(PRIVATE_KEY) --rpc-url $(MOCK_ARBITRUM_URL) --broadcast -vvvv
 	cd contracts && forge script script/RIP7755/DeployRIP7755.s.sol:DeployRIP7755 --private-key $(PRIVATE_KEY) --rpc-url $(MOCK_BASE_URL) --broadcast -vvvv
 	cd contracts && forge script script/RIP7755/DeployRIP7755.s.sol:DeployRIP7755 --private-key $(PRIVATE_KEY) --rpc-url $(MOCK_ARBITRUM_URL) --broadcast -vvvv
 	cd contracts && forge script script/DeployNFT.s.sol:DeployNFT --private-key $(PRIVATE_KEY) --rpc-url $(MOCK_ARBITRUM_URL) --broadcast -vvvv

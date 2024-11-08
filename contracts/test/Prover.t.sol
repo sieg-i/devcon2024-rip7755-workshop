@@ -9,14 +9,14 @@ import {StateValidator} from "../src/RIP7755/libraries/StateValidator.sol";
 import {Call, CrossChainRequest} from "../src/RIP7755/RIP7755Structs.sol";
 import {RIP7755Inbox} from "../src/RIP7755/RIP7755Inbox.sol";
 import {RIP7755Outbox} from "../src/RIP7755/RIP7755Outbox.sol";
-import {MockEIP4788} from "../src/rollups/MockEIP4788.sol";
+import {BeaconOracle} from "../src/rollups/BeaconOracle.sol";
 
 contract ProverTest is Test {
     using stdJson for string;
 
     // Prover public prover;
     // RIP7755Outbox public outbox;
-    // MockEIP4788 public mockEIP4788;
+    // BeaconOracle public beaconOracle;
 
     // string validProof;
     // bytes32 private constant _VERIFIER_STORAGE_LOCATION =
@@ -24,14 +24,14 @@ contract ProverTest is Test {
 
     // function setUp() public {
     //     outbox = new RIP7755Outbox();
-    //     mockEIP4788 = new MockEIP4788();
-    //     prover = new Prover(address(mockEIP4788));
+    //     beaconOracle = new BeaconOracle();
+    //     prover = new Prover(address(beaconOracle));
 
     //     string memory rootPath = vm.projectRoot();
     //     string memory path = string.concat(rootPath, "/test/data/proof.json");
     //     validProof = vm.readFile(path);
 
-    //     mockEIP4788.commitBeaconRoot(1, 1730999484, 0xd243bda4ffb1c44feeae5daa04f85dcd081b448233aa41ec48ab5970b3bbbfb7);
+    //     beaconOracle.commitBeaconRoot(1, 1730999484, 0xd243bda4ffb1c44feeae5daa04f85dcd081b448233aa41ec48ab5970b3bbbfb7);
     // }
 
     // function test_validateProof() public view {

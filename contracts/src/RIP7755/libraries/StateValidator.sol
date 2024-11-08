@@ -6,7 +6,6 @@ import {MerkleTrie} from "optimism/packages/contracts-bedrock/src/libraries/trie
 import {SecureMerkleTrie} from "optimism/packages/contracts-bedrock/src/libraries/trie/SecureMerkleTrie.sol";
 
 import {SSZ} from "./SSZ.sol";
-import {IEIP4788} from "../interfaces/IEIP4788.sol";
 
 /// @title StateValidator
 ///
@@ -131,7 +130,13 @@ library StateValidator {
     /// @param root The Beacon Chain root posted in `BEACON_ROOTS_ORACLE` on this L2
     /// @param timestamp The timestamp associated with when the beacon root was posted
     function _checkValidBeaconRoot(bytes32 root, uint256 timestamp, address beaconRootsOracle) private view {
-        bytes32 resultRoot = IEIP4788(beaconRootsOracle).beaconRoots(timestamp);
+        (bool success, bytes memory returnData) = beaconRootsOracle.staticcall(abi.encode(timestamp));
+
+        if (!success) {
+            revert BeaconRootsOracleCallFailed(abi.encode(timestamp));
+        }
+
+        bytes32 resultRoot = abi.decode(returnData, (bytes32));
 
         if (resultRoot != root) {
             revert BeaconRootDoesNotMatch({expected: root, actual: resultRoot});

@@ -2,12 +2,12 @@
 pragma solidity 0.8.24;
 
 import {Script} from "forge-std/Script.sol";
-import {MockEIP4788} from "../../src/rollups/MockEIP4788.sol";
+import {BeaconOracle} from "../../src/rollups/BeaconOracle.sol";
 
-contract DeployMockEIP4788 is Script {
+contract DeployBeaconOracle is Script {
     function run() external {
         vm.startBroadcast();
-        new MockEIP4788();
+        new BeaconOracle();
         vm.stopBroadcast();
     }
 }
