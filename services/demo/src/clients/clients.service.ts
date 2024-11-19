@@ -1,7 +1,21 @@
-import { createWalletClient, http, type Account, type Address } from "viem";
+import {
+  createWalletClient,
+  http,
+  zeroAddress,
+  encodeFunctionData,
+  type Account,
+  type Address,
+} from "viem";
 
 import { nftAbi } from "../abis/nft";
+import { outboxABI } from "../abis/outbox";
 import { sleep } from "bun";
+import {
+  mockArbitrumNFTAddress,
+  chainConfigs,
+  REWARD_ASSET,
+  ONE_WEEK,
+} from "../common/constants";
 
 export default class ClientsService {
   private walletClient: any;
@@ -54,6 +68,43 @@ export default class ClientsService {
   }
 
   async rip7755Mint(address: Address, mintPrice: bigint) {
-    // WORKSHOP: Your code here...
+    const { mockArbitrum, mockBase } = chainConfigs;
+    const encodedCallData = encodeFunctionData({
+      abi: nftAbi,
+      functionName: "mint",
+      args: [address],
+    });
+    const calls = [
+      {
+        to: mockArbitrumNFTAddress,
+        data: encodedCallData,
+        value: mintPrice,
+      },
+    ];
+    const request = {
+      requester: address,
+      calls: calls,
+      proverContract: mockBase.proverContracts.Prover,
+      destinationChainId: mockArbitrum.chainId,
+      inboxContract: mockArbitrum.contracts.inbox,
+      l2Oracle: mockArbitrum.l2Oracle,
+      l2OracleStorageKey: mockArbitrum.l2OracleStorageKey,
+      rewardAsset: REWARD_ASSET,
+      rewardAmount: (mintPrice * 102n) / 100n,
+      finalityDelaySeconds: 10,
+      nonce: 0,
+      expiry: Math.floor(Date.now() / 1000) + ONE_WEEK,
+      precheckContract: zeroAddress,
+      precheckData: "0x",
+    };
+    const hash = await this.walletClient.writeContract({
+      address: mockBase.contracts.outbox,
+      abi: outboxABI,
+      functionName: "requestCrossChainCall",
+      args: [request],
+      value: request.rewardAmount,
+    });
+    await mockBase.publicClient.waitForTransactionReceipt({ hash: hash });
+    console.log("Transaction success!");
   }
 }
